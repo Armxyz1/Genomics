@@ -3,7 +3,7 @@ import os
 from tqdm import tqdm
 import pandas as pd
 
-def cleanup():
+def cleanup(save_path):
     data_list = []
 
     for num in tqdm(range(3066720)):
@@ -32,5 +32,8 @@ def cleanup():
     df = pd.DataFrame(data_list, columns=columns)
 
     # Save the DataFrame to a CSV file
-    df.to_csv('processed_reads.csv', index=False)
+    df.to_csv(f"{save_path}/processed_reads", index=False)
+
+    df.columns = ['valid', 'start', 'length']
+
 

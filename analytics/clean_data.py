@@ -14,16 +14,17 @@ def cleanup(save_path):
             errs = data[0]
             pos = data[1]
             meth = data[2]
+            l = data[3]
             if meth == "mismatch":
-                idx = [str(i) for i, x in enumerate(data[3]) if x == True]
+                idx = [str(i) for i, x in enumerate(data[4]) if x == True]
             else:
-                ins, dele = data[3]
+                ins, dele = data[4]
                 idx = ins + dele
                 idx = [str(i) for i in idx]
             string = ';'.join(idx)
-            data_list.append([errs, pos, meth, string])
+            data_list.append([errs, pos, meth, l, string])
         else:
-            data_list.append(["Nil", "Nil", "Nil", "Nil"])
+            data_list.append(["Nil", "Nil", "Nil", "Nil", "Nil"])
 
     # Define column names
     columns = ['errs', 'pos', 'method', 'string']
@@ -32,8 +33,5 @@ def cleanup(save_path):
     df = pd.DataFrame(data_list, columns=columns)
 
     # Save the DataFrame to a CSV file
-    df.to_csv(f"{save_path}/processed_reads", index=False)
-
-    df.columns = ['valid', 'start', 'length']
-
+    df.to_csv(f"{save_path}/processed_reads.csv", index=False)
 

@@ -81,8 +81,8 @@ def process_read(args):
 
     if min1 < min2 and min1 < np.inf:
         with open(f"read_locs/{num}.pkl", "wb") as f:
-            pickle.dump((min1, p1, meth1, bpos1), f)
+            pickle.dump((min1, p1, meth1, len(read), bpos1), f)
 
     elif min2 < np.inf:
         with open(f"read_locs/{num}.pkl", "wb") as f:
-            pickle.dump((min2, p2, meth2, bpos2), f)
+            pickle.dump((min2, p2, meth2, len(read), bpos2), f)

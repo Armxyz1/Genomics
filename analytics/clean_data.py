@@ -27,7 +27,7 @@ def cleanup(save_path):
             data_list.append(["Nil", "Nil", "Nil", "Nil", "Nil"])
 
     # Define column names
-    columns = ['errs', 'pos', 'method', 'string']
+    columns = ['num_errs', 'pos', 'method', 'len_read', 'err_pos']
 
     # Create a DataFrame from data_list
     df = pd.DataFrame(data_list, columns=columns)

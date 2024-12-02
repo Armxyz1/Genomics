@@ -45,6 +45,10 @@ if __name__ == '__main__':
 
     print("Creating Graphs...")
     read_distribution(save_path)
+    coverage(save_path, len(reference))
+    statistics(save_path)
+
+    print("Graphs Created Successfully!")
 
 
 

@@ -1,4 +1,4 @@
-from edit_dist import edit_distance
+from align.edit_dist import edit_distance
 import numpy as np
 import pickle
 
@@ -8,21 +8,21 @@ def reverse_complement(read):
     return ''.join(map(lambda x: rev_map[x], read[::-1]))
 
 
-def search(read, rk_dict, agg_val):
-    starting_point = 0
-    ending_point = len(read) - 1
-    i = ending_point
+def search(read, rk_dict, agg_val, l_r):
+    starting_point = agg_val[read[-1]]
+    ending_point = l_r - 1
+    i = len(read) - 1
 
-    while i and starting_point <= ending_point:
+    while i>=0 and starting_point <= ending_point:
         char = read[i]
         rk = rk_dict[char]
         starting_point = agg_val[char] + rk.rank(starting_point)
         ending_point = agg_val[char] + rk.rank(ending_point  + 1) - 1
         i -= 1
-
     return (starting_point, ending_point) if starting_point <= ending_point else None 
 
 def process(read, idx, reference, rk_dict, agg_val, err_thresh):
+    l_r = len(reference)
     min_errs = np.inf
     best_start_pos = -1
     method = None
@@ -31,7 +31,7 @@ def process(read, idx, reference, rk_dict, agg_val, err_thresh):
     splits = [read[:l//3], read[l//3:2*l//3], read[2*l//3:]]
 
     for index, split in enumerate(splits):
-        band = search(split, rk_dict, agg_val)
+        band = search(split, rk_dict, agg_val, l_r)
         if not band:
             continue
 
@@ -72,18 +72,17 @@ def process(read, idx, reference, rk_dict, agg_val, err_thresh):
 
     return min_errs, best_start_pos, method, bad_poses
 
-def process_read(read, num, idx, reference, rk_dict, agg_val, err_thresh, progress_bar):
+def process_read(args):
+    read, num, idx, reference, rk_dict, agg_val, err_thresh = args
 
     read = read.strip().replace('N','A')
     min1, p1, meth1, bpos1 = process(read, idx, reference, rk_dict, agg_val, err_thresh)
     min2, p2, meth2, bpos2 = process(reverse_complement(read), idx, reference, rk_dict, agg_val, err_thresh)
 
     if min1 < min2 and min1 < np.inf:
-        with open(f"../read_locs/{num}.pkl", "wb") as f:
+        with open(f"read_locs/{num}.pkl", "wb") as f:
             pickle.dump((min1, p1, meth1, bpos1), f)
 
     elif min2 < np.inf:
-        with open(f"../read_locs/{num}.pkl", "wb") as f:
+        with open(f"read_locs/{num}.pkl", "wb") as f:
             pickle.dump((min2, p2, meth2, bpos2), f)
-
-    progress_bar.update(1)

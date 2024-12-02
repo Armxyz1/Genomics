@@ -1,9 +1,8 @@
-from support import *
-from rank import SuccinctRank
+from align.support import *
+from align.rank import SuccinctRank
 from tqdm import tqdm
 import warnings
 warnings.filterwarnings("ignore")
-from multiprocessing import Pool, cpu_count
 
 
 next_char = {'A': 'C', 'C': 'G', 'G': 'T', 'T': '$'}
@@ -30,16 +29,7 @@ def align_reads(bwt, n, idx, reference, reads, err_thresh):
     reads = list(enumerate(reads))
     progress = tqdm(total=len(reads))
 
-    # with Pool(cpu_count()) as p:
-    #     p.map(process_read, [(read, idx, reference, rk_dict, agg_val, err_thresh, progress) for read in reads])
-
-    for part in range(0, len(reads), 100):
-        with Pool(cpu_count()) as p:
-            p.map(process_read, [(read, idx, reference, rk_dict, agg_val, err_thresh, progress) for read in reads[part:part+100]])
-
-
-    
-    
-    
-    
-
+    for num, read in reads:
+        process_read((read, num, idx, reference, rk_dict, agg_val, err_thresh))
+        progress.update(1)
+    progress.close()

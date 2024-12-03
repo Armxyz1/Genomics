@@ -58,4 +58,4 @@ Exon lengths:
 
 Error distribution:
 
-![Error distribution](figures/error_distribution.png)
+![Error distribution](figures/error_rate.png)

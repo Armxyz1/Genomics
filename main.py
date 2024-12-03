@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser.add_argument('--ref', type=str, help='Reference Sequence file path', default='gene_data/chrX.fa')
     parser.add_argument('--reads', type=str, help='Reads file path', default='gene_data/reads')
     parser.add_argument('--err_thresh', type=int, help='Error Threshold', default=2)
-    parser.add_argument('--save_path', type=str, help='Save Path', default='../results.csv')
+    parser.add_argument('--save_path', type=str, help='Save Path', default='results')
 
     args = parser.parse_args()
 

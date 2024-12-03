@@ -25,8 +25,8 @@ def coverage(save_path, n):
     coverage_array = np.zeros(n)
 
     for i in range(len(df)):
-        start = df['start'].iloc[i]
-        length = df['length'].iloc[i]
+        start = int(df['pos'].iloc[i])
+        length = int(df['len_read'].iloc[i])
         end = start + length
         coverage_array[start:end] += 1
 

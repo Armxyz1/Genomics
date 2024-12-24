@@ -63,6 +63,7 @@ Error distribution:
 ## Inference
 
 - Highest number of mismatches per read occurred in bins labelled 3008 and 3132, corresponding to locations between 46 million and 48 million base pairs in the X chromosome, which lies on the band Xp11.3.
+
 Bands on X chromosome with above region highlighted. (Source : Wikipedia)
 ![X Chromosome](figures/X_Chromosome.png)
 - Few important genes on this band are MAOA, MAOB, EFHC2, NDP and CDK16

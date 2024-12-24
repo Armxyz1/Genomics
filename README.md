@@ -63,7 +63,8 @@ Error distribution:
 ## Inference
 
 - Highest number of mismatches per read occurred in bins labelled 3008 and 3132, corresponding to locations between 46 million and 48 million base pairs in the X chromosome, which lies on the band Xp11.3.
-
+Bands on X chromosome with above region highlighted. (Source : Wikipedia)
+![X Chromosome](figures/X_Chromosome.png)
 - Few important genes on this band are MAOA, MAOB, EFHC2, NDP and CDK16
 - NDP is responsible for encoding Norrin protein, responsible for retinal development. Mismatches here signal towards potentially abnormal development of the retina, which may even lead to blindness.​
 - CDK16 is responsible for encoding PCTAIRE-1 enzyme, responsible for autophagy and decrease in cancer cell proliferation. Abnormailities in this gene have been shown to increase occurrences of skin, lung, breast, prostateand many other cancers.

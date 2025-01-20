@@ -26,6 +26,18 @@ To run the analysis. Add your data in `gene_data` and use the following command:
 python3 main.py --bwt gene_data/chrX_last_col.txt --map gene_data/chrX_map.txt --ref gene_data/chrX.fa --reads gene_data/reads --err_thresh 2 --save_path ../results.csv
 ```
 
+A C++ version of the code is also available. To run the C++ version, first compile the code using the following command:
+
+```bash
+g++ -fopenmp -o main_cpp main_cpp.cpp
+```
+
+Then run the compiled code using:
+
+```bash
+./main_cpp gene_data/chrX_last_col.txt gene_data/chrX_map.txt gene_data/chrX.fa gene_data/reads
+```
+
 ## Results
 
 Distribution of starting points of matched reads vs position:
